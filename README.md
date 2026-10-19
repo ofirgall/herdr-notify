@@ -1,7 +1,10 @@
 # herdr-notify
 
 Herdr plugin: get notified (OS notification + herdr toast) when the current zsh
-command in a pane finishes. A herdr take on tmux-notify's shell-hook mode.
+command in a pane finishes.
+
+Inspired by [tmux-notify](https://github.com/rickstaa/tmux-notify) (its shell-hook mode).
+
 
 ## Usage
 
