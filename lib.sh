@@ -4,6 +4,7 @@ HN_STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/herdr-notify"
 HERDR="${HERDR_BIN_PATH:-herdr}"
 HN_SOURCE="plugin:herdr-notify"   # same convention as other plugins
 HN_TOKEN="notify"
+HN_GLYPH=""   # sidebar glyph for a watched pane/workspace
 
 hn_sentinel() { printf '%s/%s.watch' "$HN_STATE_DIR" "$1"; }
 
@@ -27,8 +28,8 @@ hn_sentinel_ws() { [ -f "$(hn_sentinel "$1")" ] && head -n1 "$(hn_sentinel "$1")
 # The pane token shows in agent rows; the workspace token is what
 # [ui.sidebar.spaces] rows render, so set both.
 hn_set_token() {
-  "$HERDR" pane report-metadata "$1" --source "$HN_SOURCE" --token "$HN_TOKEN=⏳" >/dev/null 2>&1
-  [ -n "${2:-}" ] && "$HERDR" workspace report-metadata "$2" --source "$HN_SOURCE" --token "$HN_TOKEN=⏳" >/dev/null 2>&1
+  "$HERDR" pane report-metadata "$1" --source "$HN_SOURCE" --token "$HN_TOKEN=$HN_GLYPH" >/dev/null 2>&1
+  [ -n "${2:-}" ] && "$HERDR" workspace report-metadata "$2" --source "$HN_SOURCE" --token "$HN_TOKEN=$HN_GLYPH" >/dev/null 2>&1
   return 0
 }
 
