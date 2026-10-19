@@ -1,0 +1,31 @@
+id = "herdr-notify"
+name = "Herdr Notify"
+version = "0.1.0"
+min_herdr_version = "0.8.0"
+description = "Watch a pane and notify (OS + herdr toast) when its current zsh command finishes."
+platforms = ["linux", "macos"]
+
+# Clears stale sentinels (pane ids may be reused after a restart) and links the
+# zsh hook to a stable path: ${XDG_STATE_HOME:-~/.local/state}/herdr-notify/hook.zsh
+[[startup]]
+command = ["bash", "cleanup.sh", "startup"]
+
+[[events]]
+on = "pane.closed"
+command = ["bash", "cleanup.sh", "event"]
+
+[[events]]
+on = "pane.exited"
+command = ["bash", "cleanup.sh", "event"]
+
+[[actions]]
+id = "watch"
+title = "Notify when the pane's command finishes"
+contexts = ["global"]
+command = ["bash", "watch.sh"]
+
+[[actions]]
+id = "cancel"
+title = "Cancel the pane's notify watch"
+contexts = ["global"]
+command = ["bash", "cancel.sh"]
