@@ -29,3 +29,9 @@ id = "cancel"
 title = "Cancel the pane's notify watch"
 contexts = ["global"]
 command = ["bash", "cancel.sh"]
+
+[[actions]]
+id = "toggle"
+title = "Toggle notify watch on the pane"
+contexts = ["global"]
+command = ["bash", "toggle.sh"]

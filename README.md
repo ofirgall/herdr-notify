@@ -13,6 +13,7 @@ Inspired by [tmux-notify](https://github.com/rickstaa/tmux-notify) (its shell-ho
   `<workspace>|<tab>` / `<cmd> finished (exit N)`, then the watch clears.
   Watching an idle prompt fires after the *next* command finishes.
 - `herdr-notify.cancel` stops watching without notifying.
+- `herdr-notify.toggle` watches the pane, or cancels if it is already watched (one key for both).
 - `pane.closed` / `pane.exited` remove stale watches.
 
 Bind them in herdr's config as `type = "plugin_action"` and add `{token = "$notify"}`
