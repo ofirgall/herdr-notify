@@ -7,8 +7,9 @@ pane="${HERDR_PANE_ID:-}"
 hn_valid_pane "$pane" || exit 0
 
 # Remove the sentinel up front so a slow notification path can't double-fire.
+ws="$(hn_sentinel_ws "$pane")"
 rm -f "$(hn_sentinel "$pane")"
-hn_clear_token "$pane"
+hn_clear_token "$pane" "$ws"
 
 ws_label=""
 tab_label=""

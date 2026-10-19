@@ -5,7 +5,12 @@
 
 if [ "${1:-}" = "startup" ]; then
   hn_link_hook
-  rm -f "$HN_STATE_DIR"/*.watch
+  for f in "$HN_STATE_DIR"/*.watch; do
+    [ -f "$f" ] || continue
+    p="$(basename "$f" .watch)"; ws="$(head -n1 "$f")"
+    rm -f "$f"
+    hn_clear_token "$p" "$ws"
+  done
   exit 0
 fi
 
@@ -20,5 +25,7 @@ if [ -n "$json" ]; then
 fi
 [ -n "$pane" ] || pane="${HERDR_PANE_ID:-}"
 hn_valid_pane "$pane" || exit 0
+ws="$(hn_sentinel_ws "$pane")"
 rm -f "$(hn_sentinel "$pane")"
+hn_clear_token "$pane" "$ws"
 exit 0

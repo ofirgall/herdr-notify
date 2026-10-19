@@ -16,7 +16,9 @@ Inspired by [tmux-notify](https://github.com/rickstaa/tmux-notify) (its shell-ho
 - `pane.closed` / `pane.exited` remove stale watches.
 
 Bind them in herdr's config as `type = "plugin_action"` and add `{token = "$notify"}`
-to a sidebar row.
+to a sidebar row. The token is set on both the pane (agent rows) and its
+workspace (`[ui.sidebar.spaces]` rows); the workspace token clears once no
+watched pane is left in it.
 
 ## zsh hook
 
@@ -27,5 +29,5 @@ The plugin's startup (and `watch`) symlinks the hook to a stable path. In `.zshr
   && source ${XDG_STATE_HOME:-$HOME/.local/state}/herdr-notify/hook.zsh
 ```
 
-State lives in `${XDG_STATE_HOME:-$HOME/.local/state}/herdr-notify/<pane_id>.watch`.
+State lives in `${XDG_STATE_HOME:-$HOME/.local/state}/herdr-notify/<pane_id>.watch` (contents: the workspace id).
 Requires `jq` for workspace/tab labels (falls back to `herdr|<pane id>`).

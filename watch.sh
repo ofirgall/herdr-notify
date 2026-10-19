@@ -5,6 +5,7 @@ pane="${HERDR_PANE_ID:-}"
 hn_valid_pane "$pane" || exit 0
 hn_link_hook
 [ -f "$(hn_sentinel "$pane")" ] && exit 0   # already watched
-: > "$(hn_sentinel "$pane")"
-hn_set_token "$pane"
+ws="$(hn_ws_of "$pane")"
+printf '%s\n' "$ws" > "$(hn_sentinel "$pane")"
+hn_set_token "$pane" "$ws"
 exit 0
