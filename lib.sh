@@ -11,11 +11,11 @@ hn_sentinel() { printf '%s/%s.watch' "$HN_STATE_DIR" "$1"; }
 hn_valid_pane() { [ -n "$1" ] && case "$1" in */*) return 1 ;; esac; }
 
 hn_set_token() {
-  "$HERDR" pane report-metadata --source "$HN_SOURCE" --token "$HN_TOKEN=⏳" "$1" >/dev/null 2>&1
+  "$HERDR" pane report-metadata "$1" --source "$HN_SOURCE" --token "$HN_TOKEN=⏳" >/dev/null 2>&1
 }
 
 hn_clear_token() {
-  "$HERDR" pane report-metadata --source "$HN_SOURCE" --clear-token "$HN_TOKEN" "$1" >/dev/null 2>&1
+  "$HERDR" pane report-metadata "$1" --source "$HN_SOURCE" --clear-token "$HN_TOKEN" >/dev/null 2>&1
 }
 
 # (Re)create the stable symlink the user's zshrc sources.
